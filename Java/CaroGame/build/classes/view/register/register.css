@@ -1,0 +1,20 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+#txtTK, #txtMK, #txtMKR {
+    -fx-border-color: #D9D9D9;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: black;
+}
+
+#btnDangKy{
+    -fx-background-color: #007FFF;
+    -fx-border-radius: 5px;
+}

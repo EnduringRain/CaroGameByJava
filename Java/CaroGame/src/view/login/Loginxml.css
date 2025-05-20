@@ -1,0 +1,39 @@
+/*
+ * Stylesheet file for JavaFX application.
+ */
+
+.mainFxmlClass {
+
+}
+
+#txtTaiKhoan, #txtMK {
+    -fx-border-color: #D9D9D9;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+#textDK:hover {
+    -fx-fill: blue;
+}
+
+#btnDangNhap{
+    -fx-background-color: #007FFF;
+    -fx-border-radius: 5px;
+}
+
+#btnDangNhapKhach{
+    -fx-border: 55px;
+    -fx-border-color:#007FFF;
+    -fx-background-color: white;
+    -fx-border-radius: 5px;
+}
+
+#frmDangNhap{
+    -fx-border-color: #007FFF;
+}
+
+#paneMain{
+    -fx-border-radius: 25px;
+}

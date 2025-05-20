@@ -157,6 +157,6 @@ public class LoginController implements Initializable {
 
     void setTaiKhoan(String tk, String mk) {
         txtTK.setText(tk);
-        txtTK.setText(mk);
+        txtMK.setText(mk);
     }
 }

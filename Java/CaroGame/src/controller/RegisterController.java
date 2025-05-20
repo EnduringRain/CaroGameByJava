@@ -63,22 +63,27 @@ public class RegisterController implements Initializable {
         if (!mk.equalsIgnoreCase(mkR)) {
             showAlert(Alert.AlertType.ERROR, "Lỗi", "Mật khẩu không khớp");
         } else {
-            int n = tkS.taoTaiKhoan(tk, mk);
-            if (n > 0) {
-                showAlert(Alert.AlertType.INFORMATION, "Thông báo", "Đăng ký thành công");
+            try {
+                int n = tkS.taoTaiKhoan(tk, mk);
+                if (n > 0) {
+                    showAlert(Alert.AlertType.INFORMATION, "Thông báo", "Đăng ký thành công");
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(Constants.LOGIN_FXML));
-                Parent root = loader.load();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(Constants.LOGIN_FXML));
+                    Parent root = loader.load();
 
-                controller.LoginController control = loader.getController();
-                control.setTaiKhoan(tk, mk);
+                    controller.LoginController control = loader.getController();
+                    control.setTaiKhoan(tk, mk);
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                stage.setScene(new Scene(root));
-                stage.centerOnScreen();
-                stage.show();
+                    stage.setScene(new Scene(root));
+                    stage.centerOnScreen();
+                    stage.show();
+                }
+            } catch (IOException | SQLException e) {
+                showAlert(Alert.AlertType.ERROR, "Lỗi", e.getMessage());
             }
+
         }
     }
 

@@ -1,5 +1,6 @@
 package controller.caro;
 
+import controller.LoginController;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
@@ -25,7 +26,7 @@ public class UIManager {
     }
 
     public void setCurrentUser(String username) {
-        this.currentUser = username;
+        this.currentUser = LoginController.getCurrentUser();
         if (btnSaveRecord != null) {
             if (username != null && !username.equalsIgnoreCase("Khách") && !username.isEmpty()) {
                 btnSaveRecord.setVisible(true);

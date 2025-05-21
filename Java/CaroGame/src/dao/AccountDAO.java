@@ -67,7 +67,7 @@ public class AccountDAO {
         Account ac = null;
 
         con = db.getConnection();
-        call = con.prepareCall("{call GET_ACCOUNTBYUSER (?)}");
+        call = con.prepareCall("{call GET_ACCOUNT_BY_USER (?)}");
         call.setString(1, tk);
 
         rs = call.executeQuery();

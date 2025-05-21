@@ -64,6 +64,12 @@ public class RegisterController implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Lỗi", "Mật khẩu không khớp");
         } else {
             try {
+                // Kiểm tra tài khoản đã tồn tại chưa
+                if (tkS.kiemTraTaiKhoan(tk, mk)) {
+                    showAlert(Alert.AlertType.ERROR, "Lỗi", "Tên tài khoản đã tồn tại, vui lòng chọn tên khác");
+                    return;
+                }
+
                 int n = tkS.taoTaiKhoan(tk, mk);
                 if (n > 0) {
                     showAlert(Alert.AlertType.INFORMATION, "Thông báo", "Đăng ký thành công");
@@ -83,7 +89,6 @@ public class RegisterController implements Initializable {
             } catch (IOException | SQLException e) {
                 showAlert(Alert.AlertType.ERROR, "Lỗi", e.getMessage());
             }
-
         }
     }
 

@@ -25,10 +25,10 @@ public class RecordDAO {
 
         while (rs.next()) {
             lst.add(new Record(
-                rs.getString("ID"),
-                rs.getInt("TIME"),
-                rs.getDate("CREATED_DATE"),
-                rs.getString("ACCOUNT_ID")
+                    rs.getString("ID"),
+                    rs.getInt("TIME"),
+                    rs.getDate("CREATED_DATE"),
+                    rs.getString("ACCOUNT_ID")
             ));
         }
         closeResources(con, rs, call);
@@ -47,10 +47,10 @@ public class RecordDAO {
 
         while (rs.next()) {
             lst.add(new Record(
-                rs.getString("ID"),
-                rs.getInt("TIME"),
-                rs.getDate("CREATED_DATE"),
-                rs.getString("ACCOUNT_ID")
+                    rs.getString("ID"),
+                    rs.getInt("TIME"),
+                    rs.getDate("CREATED_DATE"),
+                    rs.getString("ACCOUNT_ID")
             ));
         }
         closeResources(con, rs, call);
@@ -67,9 +67,9 @@ public class RecordDAO {
             call = con.prepareCall("{call INSERT_RECORD(?, ?, ?, ?)}");
             call.setString(1, record.getId());
             call.setInt(2, record.getTime());
-            call.setDate(3, record.getCreatedDate());  // Đảm bảo đây là java.sql.Date
+            call.setDate(3, record.getCreatedDate());
             call.setString(4, record.getAccountId());
-            
+
             result = call.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Lỗi khi thêm kỷ lục: " + e.getMessage());
@@ -77,7 +77,7 @@ public class RecordDAO {
         } finally {
             closeResources(con, null, call);
         }
-        
+
         return result;
     }
 
@@ -94,10 +94,10 @@ public class RecordDAO {
 
         while (rs.next()) {
             lst.add(new Record(
-                rs.getString("ID"),
-                rs.getInt("TIME"),
-                rs.getDate("CREATED_DATE"),
-                rs.getString("ACCOUNT_ID")
+                    rs.getString("ID"),
+                    rs.getInt("TIME"),
+                    rs.getDate("CREATED_DATE"),
+                    rs.getString("ACCOUNT_ID")
             ));
         }
         closeResources(con, rs, call);

@@ -25,6 +25,7 @@ public class Main extends Application {
         primaryStage.setTitle("Caro");
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

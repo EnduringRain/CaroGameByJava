@@ -1,0 +1,228 @@
+/* Root styles - Chung cho toàn ứng dụng */
+.root {
+    -fx-font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #F5F5F5; /* Nền xám nhạt cho giao diện sáng */
+    -fx-text-fill: #333333; /* Màu chữ tối để dễ đọc */
+}
+
+/* Container chính (VBox hoặc HBox) */
+.content-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+    -fx-alignment: center;
+}
+
+/* Tiêu đề trang */
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-alignment: center;
+    -fx-padding: 10px 0 20px 0;
+}
+
+/* Label chung */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-padding: 5px;
+}
+
+/* Button chung */
+.button {
+    -fx-background-color: #007FFF; /* Màu xanh dương chủ đạo */
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);
+    -fx-transition: -fx-background-color 0.3s;
+}
+
+.button:hover {
+    -fx-background-color: #005BB5; /* Màu xanh đậm hơn khi hover */
+}
+
+/* Button hủy (Quit, Cancel, v.v.) */
+.button-cancel {
+    -fx-background-color: #F44336; /* Màu đỏ */
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);
+}
+
+.button-cancel:hover {
+    -fx-background-color: #D32F2F; /* Đỏ đậm hơn khi hover */
+}
+
+/* TextField chung (bao gồm tìm kiếm) */
+.text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #999999;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);
+}
+
+.text-field:hover, .text-field:focused {
+    -fx-border-color: #007FFF; /* Viền xanh khi hover hoặc focus */
+}
+
+/* RadioButton */
+.radio-button {
+    -fx-padding: 5px 15px;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.radio-button .radio {
+    -fx-border-color: #007FFF;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-padding: 3px;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: #007FFF;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-size: 14px;
+}
+
+.combo-box:hover, .combo-box:focused {
+    -fx-border-color: #007FFF;
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 2);
+}
+
+.table-view .column-header {
+    -fx-background-color: #F5F5F5;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1 0;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 8px;
+}
+
+.table-view .table-cell {
+    -fx-padding: 8px;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1 0;
+    -fx-font-size: 13px;
+    -fx-alignment: center-left;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #F9F9F9; /* Nền xen kẽ cho hàng lẻ */
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #38a8f8; /* Màu xanh nhạt khi chọn */
+    -fx-text-fill: #333333;
+}
+
+/* MenuBar */
+.menu-bar {
+    -fx-background-color: #333333;
+    -fx-padding: 5px;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+}
+
+.menu-item {
+    -fx-background-color: #333333;
+    -fx-padding: 5px 10px;
+}
+
+.menu-item:hover {
+    -fx-background-color: #555555;
+}
+
+/* GridPane (dành cho Caro hoặc các bảng tương tự) */
+.grid-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+    -fx-grid-lines-visible: true;
+    -fx-hgap: 1px;
+    -fx-vgap: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 2);
+}
+
+.grid-pane > .button {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0.5px;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+    -fx-border-radius: 0;
+}
+
+.grid-pane > .button:hover {
+    -fx-background-color: #F5F5F5;
+}
+
+/* ProgressBar */
+.progress-bar {
+    -fx-accent: #007FFF;
+    -fx-background-color: #E0E0E0;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.progress-bar .track {
+    -fx-background-color: #E0E0E0;
+    -fx-background-radius: 10px;
+}
+
+/* Spinner */
+.spinner {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.spinner:hover, .spinner:focused {
+    -fx-border-color: #007FFF;
+}

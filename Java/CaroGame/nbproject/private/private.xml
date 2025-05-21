@@ -4,8 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/main/Main.java</file>
-            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/controller/LoginController.java</file>
-            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/controller/RegisterController.java</file>
+            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/utils/SoundManager.java</file>
+            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/model/Board.java</file>
+            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/model/Record.java</file>
+            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/view/application.css</file>
+            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/service/RecordService.java</file>
+            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/utils/Constants.java</file>
+            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/model/Account.java</file>
+            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/service/AccountService.java</file>
+            <file>file:/C:/Users/Vu/Desktop/ProjectLTDD/CaroGameByJava/Java/CaroGame/src/model/Cell.java</file>
         </group>
     </open-files>
 </project-private>

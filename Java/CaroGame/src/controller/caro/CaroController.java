@@ -1,14 +1,22 @@
 package controller.caro;
 
+import controller.LoginController;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
@@ -18,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Board;
+import service.RecordService;
 import utils.Constants;
 import utils.SoundManager;
 
@@ -53,6 +62,18 @@ public class CaroController implements Initializable {
     private Label lbTimeLeft;
     @FXML
     private Spinner<Integer> spinNToWin;
+    @FXML
+    private MenuItem menuItemTroChoi;
+    @FXML
+    private MenuItem menuItemKyLuc;
+    @FXML
+    private MenuItem menuItemThoat;
+    @FXML
+    private MenuItem menuItemLuatChoi;
+    @FXML
+    private MenuItem menuItemCachChoi;
+    @FXML
+    private MenuItem menuItemDangNhap;
 
     // Các class quản lý
     private BoardManager boardManager;
@@ -106,11 +127,11 @@ public class CaroController implements Initializable {
         SpinnerValueFactory<Integer> winLengthFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
                 3, 10, 5); // Min: 3, Max: 10, Default: 5
         spinNToWin.setValueFactory(winLengthFactory);
-    }
 
-    // Methods lấy tên người đăng nhập nếu có
-    public void setCurrentUser(String username) {
-        uiManager.setCurrentUser(username);
+        boardManager.reset(boardSize, playerSymbol, aiSymbol);
+        boardManager.createBoard();
+        boardManager.setupCellEvents(this);
+        uiManager.updateTurnLabel(isPlayerTurn);
     }
 
     @FXML
@@ -267,13 +288,54 @@ public class CaroController implements Initializable {
     }
 
     @FXML
-    private void showRecord(ActionEvent event) {
+    private void btnSaveRecord(ActionEvent event) throws SQLException {
+        try {
+            // Lấy thời gian từ gameTimer
+            String timeStr = lbTime.getText();
+            String[] timeParts = timeStr.split(":");
+            int minutes = Integer.parseInt(timeParts[0]);
+            int seconds = Integer.parseInt(timeParts[1]);
+            int totalSeconds = minutes * 60 + seconds;
 
-    }
+            // Lấy tên người chơi từ LoginController
+            String currentUser = LoginController.getCurrentUser();
 
-    @FXML
-    private void btnSaveRecord(ActionEvent event) {
+            if (currentUser == null || currentUser.equalsIgnoreCase("Khách")) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Bạn cần đăng nhập để lưu kỷ lục!");
+                alert.showAndWait();
+                return;
+            }
 
+            // Lưu record vào database
+            RecordService recordService = new RecordService();
+            int success = recordService.addRecord(totalSeconds, currentUser);
+
+            if (success > 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Lưu kỷ lục thành công!");
+                alert.showAndWait();
+
+                // Disable nút lưu kỷ lục sau khi lưu thành công
+                btnSaveRecord.setDisable(true);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Lỗi");
+                alert.setHeaderText(null);
+                alert.setContentText("Không thể lưu kỷ lục!");
+                alert.showAndWait();
+            }
+        } catch (ClassNotFoundException | NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText(null);
+            alert.setContentText("Đã xảy ra lỗi: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -303,4 +365,66 @@ public class CaroController implements Initializable {
     public boolean isPlayerTurn() {
         return isPlayerTurn;
     }
+
+    @FXML
+    private void menuItemTroChoiAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void menuItemDangNhapAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+        URL resourceUrl = getClass().getResource(Constants.LOGIN_FXML);
+        FXMLLoader loader = new FXMLLoader(resourceUrl);
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    @FXML
+    private void menuItemKyLucAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+        URL resourceUrl = getClass().getResource(Constants.RECORD_FXML);
+        FXMLLoader loader = new FXMLLoader(resourceUrl);
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    @FXML
+    private void menuItemThoatAction(ActionEvent event) {
+        System.exit(0);
+    }
+
+    @FXML
+    private void menuItemLuatChoiAction(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Luật chơi");
+        alert.setHeaderText("Luật chơi Caro");
+        alert.setContentText("- Người chơi và máy lần lượt đánh X và O vào các ô trên bàn cờ.\n"
+                + "- Người chơi nào tạo được 5 ký hiệu liên tiếp theo hàng ngang, dọc hoặc chéo sẽ thắng.\n"
+                + "- Trò chơi kết thúc khi một người chơi thắng hoặc bàn cờ đã đầy.");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void menuItemCachChoiAction(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cách chơi");
+        alert.setHeaderText("Cách chơi Caro");
+        alert.setContentText("1. Chọn kích thước bàn cờ và số ký hiệu liên tiếp để thắng.\n"
+                + "2. Chọn người chơi đi trước và ký hiệu (X hoặc O).\n"
+                + "3. Chọn độ khó của AI.\n"
+                + "4. Nhấn 'Trò chơi mới' để bắt đầu.\n"
+                + "5. Nhấp vào các ô trên bàn cờ để đánh.\n"
+                + "6. Khi thắng, bạn có thể lưu kỷ lục thời gian chơi.");
+        alert.showAndWait();
+    }
+
 }

@@ -42,6 +42,8 @@ public class LoginController implements Initializable {
 
     private AccountService tkS;
 
+    private static String currentUser;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -49,6 +51,10 @@ public class LoginController implements Initializable {
         } catch (ClassNotFoundException ex) {
             showError("Lỗi khởi tạo", "Không thể khởi tạo TaiKhoanService: " + ex.getMessage());
         }
+    }
+
+    public static String getCurrentUser() {
+        return currentUser;
     }
 
     @FXML
@@ -141,17 +147,17 @@ public class LoginController implements Initializable {
     }
 
     private void loadCaroScreen(ActionEvent event, String username) throws IOException {
+        currentUser = username;
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         URL resourceUrl = getClass().getResource(Constants.CARO_FXML);
         FXMLLoader loader = new FXMLLoader(resourceUrl);
         Parent root = loader.load();
 
-        controller.caro.CaroController caroController = loader.getController();
-        caroController.setCurrentUser(username);
-
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.centerOnScreen();
+        stage.setResizable(false);
         stage.show();
     }
 
